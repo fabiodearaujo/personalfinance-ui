@@ -1,0 +1,69 @@
+:root {
+  --primary-blue: #003d82;
+  --secondary-blue: #0056b3;
+  --light-blue: #e8f2ff;
+  --accent-blue: #0066cc;
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --gray-text: #4a5568;
+  --border-color: #e0e7ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--white);
+  color: var(--gray-text);
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--primary-blue);
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+.cta-section h2 {
+  color: white;
+}
