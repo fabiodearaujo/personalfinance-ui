@@ -1,0 +1,293 @@
+/* Dashboard Container */
+.dashboard {
+  min-height: 100vh;
+  background-color: var(--light-gray);
+  padding: 2rem;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: var(--white);
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 61, 130, 0.1);
+}
+
+.dashboard-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.dashboard-header p {
+  margin: 0.5rem 0 0 0;
+  opacity: 0.9;
+  color: var(--white);
+}
+
+.dashboard-logout-button {
+  background: var(--white);
+  color: var(--primary-blue);
+  border: none;
+  padding: 0.625rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dashboard-logout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-logout-button:active {
+  transform: translateY(0);
+}
+
+/* Main Content */
+.dashboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-welcome-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 61, 130, 0.1);
+  margin-bottom: 2rem;
+}
+
+.dashboard-welcome-card h2 {
+  color: var(--primary-blue);
+  margin-top: 0;
+}
+
+.dashboard-welcome-card p {
+  color: var(--gray-text);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Welcome Section */
+.dashboard-welcome-section {
+  background-color: var(--light-blue);
+  padding: 2rem;
+  border-radius: 6px;
+  border-left: 4px solid var(--primary-blue);
+  margin-bottom: 2rem;
+}
+
+.dashboard-welcome-section h2 {
+  color: var(--primary-blue);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.dashboard-welcome-section .user-email {
+  color: var(--gray-text);
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Accounts Grid */
+.dashboard-accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Account Card */
+.account-card {
+  padding: 2rem;
+  background-color: var(--light-gray);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 61, 130, 0.1);
+}
+
+.account-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.account-card p {
+  color: var(--gray-text);
+  margin: 0;
+}
+
+.account-card .balance-label {
+  margin-bottom: 1.5rem;
+}
+
+.account-card .balance-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.account-card-loading {
+  color: var(--gray-text);
+  font-style: italic;
+}
+
+/* Main Account Card */
+.account-card.main-account {
+  border: 2px solid var(--primary-blue);
+}
+
+.account-card.main-account h3 {
+  color: var(--primary-blue);
+}
+
+.account-card.main-account .balance-amount {
+  color: var(--primary-blue);
+}
+
+/* Savings Account Card */
+.account-card.savings-account {
+  border: 2px solid var(--accent-blue);
+}
+
+.account-card.savings-account h3 {
+  color: var(--accent-blue);
+}
+
+.account-card.savings-account .balance-amount {
+  color: var(--accent-blue);
+}
+
+/* Account Action Button */
+.account-button {
+  border: none;
+  color: var(--white);
+  padding: 0.625rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.account-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.account-button:active {
+  transform: translateY(0);
+}
+
+.main-account .account-button {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+}
+
+.savings-account .account-button {
+  background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--accent-blue) 100%);
+}
+
+/* Add Transaction Card */
+.add-transaction-card {
+  background: linear-gradient(135deg, var(--light-blue) 0%, rgba(232, 242, 255, 0.5) 100%);
+  border: 2px dashed var(--accent-blue);
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 200px;
+}
+
+.add-transaction-card:hover {
+  border-color: var(--primary-blue);
+  background: linear-gradient(135deg, #e8f2ff 0%, rgba(0, 86, 179, 0.05) 100%);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 61, 130, 0.15);
+}
+
+.add-transaction-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--primary-blue);
+}
+
+.add-transaction-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin: 0 0 0.5rem 0;
+}
+
+.add-transaction-description {
+  color: var(--gray-text);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard-header {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .dashboard-header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-logout-button {
+    width: 100%;
+  }
+
+  .dashboard-welcome-card {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .dashboard-welcome-section {
+    padding: 1.5rem;
+  }
+
+  .account-card {
+    padding: 1.5rem;
+  }
+
+  .account-card .balance-amount {
+    font-size: 2rem;
+  }
+
+  .dashboard-accounts-grid {
+    gap: 1rem;
+  }
+}
