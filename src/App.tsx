@@ -1,15 +1,110 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { LoginModal } from './components/LoginModal'
+import { SignUpModal } from './components/SignUpModal'
+import { Dashboard } from './components/Dashboard'
+import { Transactions } from './components/Transactions'
+import { useSignUp } from './hooks/useSignUp'
+import { useLogin } from './hooks/useLogin'
 import './App.css'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
+  const [showSignUpModal, setShowSignUpModal] = useState(false)
+  const [currentView, setCurrentView] = useState<'dashboard' | 'transactions'>('dashboard')
+  const [mainBalance, setMainBalance] = useState(0)
+
+  // Check if user is already logged in on mount
+  useEffect(() => {
+    const token = localStorage.getItem('access_token')
+    if (token) {
+      setIsLoggedIn(true)
+    }
+  }, [])
+
+  const {
+    isLoading: isSignUpLoading,
+    message: signUpMessage,
+    handleSignUpSubmit,
+    clearMessage: clearSignUpMessage,
+  } = useSignUp(
+    // onSuccess callback
+    () => {
+      setShowSignUpModal(false)
+      setShowLoginModal(true)
+    },
+    // onError callback
+    undefined
+  )
+
+  const {
+    isLoading: isLoginLoading,
+    message: loginMessage,
+    handleLoginSubmit: handleLoginSubmitAPI,
+    clearMessage: clearLoginMessage,
+  } = useLogin(
+    // onSuccess callback
+    () => {
+      setShowLoginModal(false)
+      setIsLoggedIn(true)
+      console.log('User logged in successfully')
+    },
+    // onError callback
+    undefined
+  )
 
   const handleLoginClick = () => {
+    setShowSignUpModal(false)
     setShowLoginModal(true)
   }
 
-  const handleCloseModal = () => {
+  const handleCloseLoginModal = () => {
     setShowLoginModal(false)
+    clearLoginMessage()
+  }
+
+  const handleLoginSubmit = (formData: { username: string; password: string }) => {
+    return handleLoginSubmitAPI(formData)
+  }
+
+  const handleSignUpClick = () => {
+    setShowLoginModal(false)
+    setShowSignUpModal(true)
+  }
+
+  const handleCloseSignUpModal = () => {
+    setShowSignUpModal(false)
+    clearSignUpMessage()
+  }
+
+  const handleSwitchToLogin = () => {
+    setShowSignUpModal(false)
+    setShowLoginModal(true)
+    clearSignUpMessage()
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('token_type')
+    setIsLoggedIn(false)
+    setCurrentView('dashboard')
+  }
+
+  const handleViewTransactions = (balance: number) => {
+    setMainBalance(balance)
+    setCurrentView('transactions')
+  }
+
+  const handleBackToDashboard = () => {
+    setCurrentView('dashboard')
+  }
+
+  // Show dashboard if logged in
+  if (isLoggedIn) {
+    if (currentView === 'transactions') {
+      return <Transactions balance={mainBalance} onBack={handleBackToDashboard} />
+    }
+    return <Dashboard onLogout={handleLogout} onViewTransactions={handleViewTransactions} />
   }
 
   return (
@@ -19,7 +114,7 @@ function App() {
         <div className="header-container">
           <div className="logo">
             <span className="logo-icon">💰</span>
-            <h1>FinanceFlow</h1>
+            <h1>Personal Finance App</h1>
           </div>
           <button className="login-button" onClick={handleLoginClick}>
             Log In
@@ -93,45 +188,24 @@ function App() {
       </section>
 
       {/* Login Modal */}
-      {showLoginModal && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={handleCloseModal}>
-              ✕
-            </button>
-            <h2>Welcome Back</h2>
-            <form className="login-form">
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="you@example.com"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="••••••••"
-                  required
-                />
-              </div>
-              <button type="submit" className="submit-button">
-                Sign In
-              </button>
-            </form>
-            <p className="form-footer">
-              Don't have an account?{' '}
-              <a href="#signup" className="signup-link">
-                Sign up here
-              </a>
-            </p>
-          </div>
-        </div>
-      )}
+      <LoginModal 
+        isOpen={showLoginModal} 
+        onClose={handleCloseLoginModal}
+        onSubmit={handleLoginSubmit}
+        onSwitchToSignUp={handleSignUpClick}
+        isLoading={isLoginLoading}
+        message={loginMessage}
+      />
+
+      {/* Sign Up Modal */}
+      <SignUpModal 
+        isOpen={showSignUpModal} 
+        onClose={handleCloseSignUpModal}
+        onSubmit={handleSignUpSubmit}
+        onBackToLogin={handleSwitchToLogin}
+        isLoading={isSignUpLoading}
+        message={signUpMessage}
+      />
 
       {/* Footer */}
       <footer className="footer">
